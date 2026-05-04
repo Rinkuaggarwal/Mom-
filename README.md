@@ -116,7 +116,7 @@ img {
 
     <!-- Page 2 -->
     <div class="page" id="page2">
-      <img src="your-image.png" alt="Mom">
+      <img src="IMG_20260119_232113.jpg"alt="Mom">
       <p>Thank you for your love, care, and everything you do 💖</p>
       <button onclick="nextPage()">Next ➡</button>
     </div>
