@@ -1,85 +1,59 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday Mom ❤️</title>
-
+<title>Happy Birthday Mom</title>
 <style>
 body {
   margin: 0;
-  background: #fce4ec;
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
+  background: #ffe6f0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  overflow: hidden;
 }
 
 /* Envelope */
 .envelope {
+  width: 250px;
+  height: 150px;
+  background: #ff6699;
   position: relative;
-  width: 300px;
-  height: 200px;
-  background: #ff8fa3;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .flap {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #ff6f91;
-  clip-path: polygon(0 0, 100% 0, 50% 50%);
-  transform-origin: top;
-  transition: 1s;
-}
-
-.card {
-  position: absolute;
-  width: 280px;
-  height: 180px;
-  background: white;
-  top: 10px;
-  left: 10px;
-  padding: 15px;
-  box-sizing: border-box;
-  transform: translateY(0);
-  transition: 1s;
-  overflow: hidden;
+  background: #ff3366;
+  clip-path: polygon(0 0, 100% 0, 50% 60%);
+  transition: 0.5s;
 }
 
 .open .flap {
   transform: rotateX(180deg);
+  transform-origin: top;
 }
 
-.open .card {
-  transform: translateY(-200px);
-}
-
-/* Pages */
-.page {
+/* Card */
+.card {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 230px;
+  height: 130px;
+  background: white;
+  text-align: center;
+  padding-top: 20px;
+  box-sizing: border-box;
   display: none;
 }
 
-.page.active {
+.open .card {
   display: block;
-}
-
-/* Buttons */
-button {
-  margin-top: 10px;
-  padding: 5px 10px;
-  border: none;
-  background: #ff6f91;
-  color: white;
-  cursor: pointer;
-}
-
-/* Image */
-img {
-  width: 100%;
-  border-radius: 10px;
 }
 
 /* Confetti */
@@ -88,80 +62,47 @@ img {
   width: 10px;
   height: 10px;
   background: red;
-  top: 0;
-  animation: fall linear infinite;
+  animation: fall 3s linear infinite;
 }
 
 @keyframes fall {
-  to {
-    transform: translateY(100vh);
-  }
+  0% { transform: translateY(-100px); }
+  100% { transform: translateY(100vh); }
 }
 </style>
 </head>
 
 <body>
 
-<div class="envelope" onclick="openCard()">
+<div class="envelope" onclick="openCard(this)">
   <div class="flap"></div>
-
   <div class="card">
-    
-    <!-- Page 1 -->
-    <div class="page active" id="page1">
-      <h2>🎉 Happy Birthday Mom 🎉</h2>
-      <p>You are my queen 👑 and my biggest blessing ❤️</p>
-      <button onclick="nextPage()">Next ➡</button>
-    </div>
-
-    <!-- Page 2 -->
-    <div class="page" id="page2">
-      <img src="IMG_20260119_232113.jpg"alt="Mom">
-      <p>Thank you for your love, care, and everything you do 💖</p>
-      <button onclick="nextPage()">Next ➡</button>
-    </div>
-
-    <!-- Page 3 -->
-    <div class="page" id="page3">
-      <h3>I Love You Mom ❤️</h3>
-      <p>Wishing you endless happiness and joy 🎂</p>
-    </div>
-
+    <h3>Happy Birthday Mom ❤️</h3>
+    <p>You are my world.<br>Wishing you love & happiness!</p>
   </div>
 </div>
 
-<!-- Birthday Song -->
-<audio id="song" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+<audio id="music">
+  <source src="https://www.fesliyanstudios.com/play-mp3/387" type="audio/mpeg">
+</audio>
 
 <script>
-let currentPage = 1;
-
-function openCard() {
-  document.querySelector(".envelope").classList.add("open");
-  document.getElementById("song").play();
-  createConfetti();
+function openCard(el) {
+  el.classList.add("open");
+  document.getElementById("music").play();
+  startConfetti();
 }
 
-function nextPage() {
-  document.getElementById("page" + currentPage).classList.remove("active");
-  currentPage++;
-  document.getElementById("page" + currentPage).classList.add("active");
-}
-
-function createConfetti() {
-  for (let i = 0; i < 50; i++) {
-    let confetti = document.createElement("div");
-    confetti.classList.add("confetti");
-    confetti.style.left = Math.random() * 100 + "vw";
-    confetti.style.backgroundColor = randomColor();
-    confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
-    document.body.appendChild(confetti);
+function startConfetti() {
+  for (let i = 0; i < 30; i++) {
+    let conf = document.createElement("div");
+    conf.className = "confetti";
+    conf.style.left = Math.random() * 100 + "vw";
+    conf.style.backgroundColor = 
+      ['#ff3366','#ffcc00','#66ffcc','#3399ff'][Math.floor(Math.random()*4)];
+    conf.style.animationDuration = (Math.random()*3+2)+"s";
+    document.body.appendChild(conf);
   }
-}
-
-function randomColor() {
-  const colors = ["#ff0", "#f00", "#0f0", "#00f", "#ff69b4"];
-  return colors[Math.floor(Math.random() * colors.length)];
 }
 </script>
 
